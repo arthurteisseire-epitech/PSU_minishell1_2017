@@ -19,9 +19,10 @@ int run(char *cmd, char **env)
 			return (84);
 		pid = fork();
 		wait(NULL);
-		if (pid == 0) {
+		if (pid == 0)
 			exec_cmd(cmd, env);
-		} 
+		else if (pid > 0)
+			kill(0, SIGKILL);
 		cmd = get_next_line(0);
 	}
 	return (pid);
