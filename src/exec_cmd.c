@@ -5,15 +5,21 @@
 ** by Arthur Teisseire
 */
 
+#include "my.h"
 #include "mysh.h"
 #include "tools.h"
 
 void exec_cmd(char *cmd, char **env)
 {
 	int i = 0;
+	int status;
 	char **args = split(cmd, ' ');
 
-	execve(args[0], args, env);
+	status = execve(args[0], args, env);
+	if (status == -1) {
+		my_putstr(args[0]);
+		my_putstr(": command not found\n");
+	}
 	while (args[i] != NULL) {
 		free(args[i]);
 		i++;

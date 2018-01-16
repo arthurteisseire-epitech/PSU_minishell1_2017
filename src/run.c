@@ -14,7 +14,7 @@ int run(char **env)
 	char *cmd = NULL;
 	pid_t child_pid;
 
-	do {
+	while (my_strcmp(cmd, "exit") != 0) {
 		if (cmd)
 			free(cmd);
 		if ((cmd = get_next_line(0)) == NULL)
@@ -26,6 +26,6 @@ int run(char **env)
 		} else if (child_pid == -1)
 			return (0);
 		wait(NULL);
-	} while (my_strcmp(cmd, "exit") != 0);
+	} 
 	return (child_pid);
 }
