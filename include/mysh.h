@@ -14,7 +14,7 @@
 #include <sys/wait.h>
 
 void exec_cmd(char *cmd, char **env);
-int run(char *cmd, char **env);
+int run(char **env);
 int mysh(char **env);
 
 #endif

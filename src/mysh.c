@@ -11,10 +11,9 @@
 int mysh(char **env)
 {
 	pid_t pid = getpid();
-	char *cmd = "";
 
 	if (pid > 0) {
-		pid = run(cmd, env);
+		pid = run(env);
 		return (pid == -1 ? -1 : 1);
 	} else {
 		my_puterror("An error occured during the program creation\n");

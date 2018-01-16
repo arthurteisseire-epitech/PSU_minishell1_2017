@@ -20,5 +20,6 @@ void exec_cmd(char *cmd, char **env)
 		free(args[i]);
 		i++;
 	}
-	free(cmd);
+	if (cmd != NULL)
+		free(cmd);
 }
