@@ -11,10 +11,12 @@
 
 int run(char **env)
 {
-	char *cmd;
+	char *cmd = NULL;
 	pid_t child_pid;
 
 	do {
+		if (cmd)
+			free(cmd);
 		if ((cmd = get_next_line(0)) == NULL)
 			return (-1);
 		child_pid = fork();

@@ -13,13 +13,12 @@ void exec_cmd(char *cmd, char **env)
 	int i = 0;
 	char **args = split(cmd, ' ');
 
-	//for (int i = 0; args[i] != NULL; i++)
-	//	printf("%s\n", args[i]);
 	execve(args[0], args, env);
 	while (args[i] != NULL) {
 		free(args[i]);
 		i++;
 	}
+	free(args);
 	if (cmd != NULL)
 		free(cmd);
 }
