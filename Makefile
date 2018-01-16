@@ -16,6 +16,8 @@ DTOOLS	=	$(DSRC)tools/
 SRC     =	$(DSRC)main.c \
 		$(DSRC)mysh.c \
 		$(DSRC)get_next_line.c \
+		$(DSRC)run.c \
+		$(DSRC)exec_cmd.c \
 		$(DTOOLS)split.c
 CFLAGS	=	-Wall -W -Wextra -I$(INC) -ggdb3
 OBJ	=	$(SRC:.c=.o)
