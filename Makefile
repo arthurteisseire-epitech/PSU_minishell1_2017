@@ -14,6 +14,7 @@ LIB	=	my
 LIBS	=	-L$(DLIB) -l$(LIB)
 DTOOLS	=	$(DSRC)tools/
 SRC     =	$(DSRC)main.c \
+		$(DSRC)mysh.c \
 		$(DSRC)get_next_line.c \
 		$(DTOOLS)split.c
 CFLAGS	=	-Wall -W -Wextra -I$(INC) -ggdb3
