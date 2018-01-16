@@ -1,0 +1,68 @@
+/*
+** EPITECH PROJECT, 2017
+** File Name : test_split.c
+** File description:
+** by Arthur Teisseire
+*/
+
+#include <criterion/criterion.h>
+#include "mysh.h"
+#include "tools.h"
+#include "my.h"
+
+char *my_strdup(char *str)
+{
+	char *res = malloc(sizeof(char) * (my_strlen(str) + 1));
+
+	my_strcpy(res, str);
+	return (res);
+}
+
+Test(split, get_next_word)
+{
+	char *got1 = my_strdup("lala         toto");
+	char *got2 = my_strdup("     lala         toto      ");
+	char *res;
+
+	res = get_next_word(&got1, ' ');
+	cr_assert_str_eq(res, "lala");
+	get_next_word(&got2, ' ');
+	res = get_next_word(&got2, ' ');
+	cr_assert_str_eq(res, "toto");
+	res = get_next_word(&got2, ' ');
+	cr_assert_eq(res, NULL);
+}
+
+Test(split, skip_first_flags)
+{
+	char *got = my_strdup("      lala ");
+	char *got2 = my_strdup("      ");
+	char *expected = "lala ";
+	char *expected2 = "";
+
+	skip_first_flags(&got, ' ');
+	cr_assert_str_eq(got, expected);
+	skip_first_flags(&got2, ' ');
+	cr_assert_str_eq(got2, expected2);
+}
+
+Test(split, count_words)
+{
+	cr_assert_eq(count_words("un deux trois", ' '), 3);
+	cr_assert_eq(count_words("  un deux trois ", ' '), 3);
+}
+
+Test(split, split)
+{
+	char *got = "   /bin/ls   -l  ";
+	char *expected[3] = {"/bin/ls", "-l", NULL};
+	char **res = split(got, ' ');
+	int i = 0;
+
+	while (expected[i] != NULL) {
+		cr_assert_str_eq(res[i], expected[i]);
+		i++;
+	}
+	cr_assert_eq(res[i], expected[i]);
+	cr_assert_str_eq(got, "   /bin/ls   -l  ");
+}
