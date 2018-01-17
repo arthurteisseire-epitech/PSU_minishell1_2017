@@ -15,6 +15,7 @@ int run(char **env)
 	pid_t child_pid;
 
 	while (1) {
+		my_putstr("$> ");
 		if (cmd)
 			free(cmd);
 		if (set_and_check_cmd(&cmd) == 0)
