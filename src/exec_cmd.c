@@ -17,7 +17,7 @@ void exec_cmd(char *cmd, char **env)
 
 	if (args && args[0])
 		status = execve(args[0], args, env);
-	if (status == -1) {
+	if (status == -1 && my_strcmp(cmd, "") != 0) {
 		my_putstr(args[0]);
 		my_putstr(": command not found\n");
 	}
