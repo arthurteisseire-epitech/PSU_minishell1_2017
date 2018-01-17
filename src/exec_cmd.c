@@ -19,9 +19,9 @@ void exec_cmd(char *cmd, char **env)
 
 	if (args && args[0])
 		status = execve(args[0], args, env);
-	if (status == -1 && my_strcmp(cmd, "") != 0)
+	if (status == -1 && my_strcmp(args[0], "") != 0)
 		status = exec_with_path(args, env);
-	if (status == -1 && my_strcmp(cmd, "") != 0) {
+	if (status == -1 && my_strcmp(args[0], "") != 0) {
 		my_putstr(args[0]);
 		my_putstr(": Command not found.\n");
 	}
@@ -41,6 +41,7 @@ int exec_with_path(char **args, char **env)
 	char *cmd;
 	int i = 0;
 	char *stock = args[0];
+	int len_stock = my_strlen(stock);
 
 	if (!path)
 		return (0);
@@ -52,9 +53,10 @@ int exec_with_path(char **args, char **env)
 	while (paths[i] != NULL) {
 		cmd = my_strdup(paths[i]);
 		cmd = my_realloc(cmd, "/", 1);
-		cmd = my_realloc(cmd, stock, my_strlen(stock));
+		cmd = my_realloc(cmd, stock, len_stock);
 		args[0] = cmd;
 		execve(cmd, args, env);
+		args[0] = stock;
 		free(cmd);
 		i++;
 	}

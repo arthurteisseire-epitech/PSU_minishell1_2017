@@ -10,14 +10,6 @@
 #include "tools.h"
 #include "my.h"
 
-char *my_strdup(char *str)
-{
-	char *res = malloc(sizeof(char) * (my_strlen(str) + 1));
-
-	my_strcpy(res, str);
-	return (res);
-}
-
 Test(split, get_next_word)
 {
 	char *got1 = my_strdup("lala         toto");
