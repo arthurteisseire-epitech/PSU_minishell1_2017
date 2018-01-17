@@ -27,7 +27,7 @@ SRC     =	$(DSRC)main.c \
 		$(DSPLIT)my_strncpy.c \
 		$(DSPLIT)skip_first_flags.c \
 		$(DENV)find_env.c
-CFLAGS	=	-Wall -W -Wextra -I$(INC) -ggdb3
+CFLAGS	=	-Wall -W -Wextra -I$(INC) -g
 OBJ	=	$(SRC:.c=.o)
 NAME	=	mysh
 

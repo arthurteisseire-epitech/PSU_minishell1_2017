@@ -9,6 +9,7 @@
 #define MY_H
 
 #include <unistd.h>
+#include <stdlib.h>
 
 void my_putchar(char c);
 void my_puterror(char *str);
@@ -18,5 +19,6 @@ int my_atoi(char *str);
 char *my_strcpy(char *dest, char const *src);
 int my_put_nbr(int nb);
 int my_strcmp(char const *str1, char const *str2);
+char *my_strdup(char *str);
 
 #endif

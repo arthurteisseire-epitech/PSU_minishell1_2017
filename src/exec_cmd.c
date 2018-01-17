@@ -50,8 +50,9 @@ int exec_with_path(char **args, char **env)
 	path++;
 	paths = split(path, ":");
 	while (paths[i] != NULL) {
-		cmd = my_realloc(paths[i], "/", 1);
-		cmd = my_realloc(cmd, stock, my_strlen(args[0]));
+		cmd = my_strdup(paths[i]);
+		cmd = my_realloc(cmd, "/", 1);
+		cmd = my_realloc(cmd, stock, my_strlen(stock));
 		args[0] = cmd;
 		execve(cmd, args, env);
 		free(cmd);
