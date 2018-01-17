@@ -12,13 +12,19 @@ DLIB	=	$(realpath lib/my)/
 DTESTS	=	$(realpath tests)/
 LIB	=	my
 LIBS	=	-L$(DLIB) -l$(LIB)
-DTOOLS	=	$(DSRC)tools/
+DSPLIT	=	$(DSRC)split/
 SRC     =	$(DSRC)main.c \
 		$(DSRC)mysh.c \
 		$(DSRC)get_next_line.c \
 		$(DSRC)run.c \
 		$(DSRC)exec_cmd.c \
-		$(DTOOLS)split.c
+		$(DSPLIT)split.c \
+		$(DSPLIT)count_words.c \
+		$(DSPLIT)get_next_word.c \
+		$(DSPLIT)in_str.c \
+		$(DSPLIT)len_first_word.c \
+		$(DSPLIT)my_strncpy.c \
+		$(DSPLIT)skip_first_flags.c
 CFLAGS	=	-Wall -W -Wextra -I$(INC) -ggdb3
 OBJ	=	$(SRC:.c=.o)
 NAME	=	mysh

@@ -16,5 +16,6 @@
 void exec_cmd(char *cmd, char **env);
 int run(char **env);
 int mysh(char **env);
+int set_and_check_cmd(char **cmd);
 
 #endif

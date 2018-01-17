@@ -6,7 +6,6 @@ SRC	=	my_putchar.c \
 		my_atoi.c \
 		my_put_nbr.c \
 		my_strcpy.c \
-		my_strncpy.c \
 		my_strcmp.c
 OBJ	=	$(SRC:.c=.o)
 NAME	=	libmy.a

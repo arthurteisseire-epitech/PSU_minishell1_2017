@@ -18,6 +18,5 @@ int my_atoi(char *str);
 char *my_strcpy(char *dest, char const *src);
 int my_put_nbr(int nb);
 int my_strcmp(char const *str1, char const *str2);
-char *my_strncpy(char *dest, char const *src, int n);
 
 #endif
