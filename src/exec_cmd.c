@@ -13,7 +13,7 @@ void exec_cmd(char *cmd, char **env)
 {
 	int i = 0;
 	int status = -1;
-	char **args = split(cmd, " ");
+	char **args = split(cmd, " \t");
 
 	if (args && args[0])
 		status = execve(args[0], args, env);
