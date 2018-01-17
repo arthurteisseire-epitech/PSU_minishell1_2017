@@ -13,6 +13,7 @@ DTESTS	=	$(realpath tests)/
 LIB	=	my
 LIBS	=	-L$(DLIB) -l$(LIB)
 DSPLIT	=	$(DSRC)split/
+DENV	=	$(DSRC)env/
 SRC     =	$(DSRC)main.c \
 		$(DSRC)mysh.c \
 		$(DSRC)get_next_line.c \
@@ -24,7 +25,8 @@ SRC     =	$(DSRC)main.c \
 		$(DSPLIT)in_str.c \
 		$(DSPLIT)len_first_word.c \
 		$(DSPLIT)my_strncpy.c \
-		$(DSPLIT)skip_first_flags.c
+		$(DSPLIT)skip_first_flags.c \
+		$(DENV)find_env.c
 CFLAGS	=	-Wall -W -Wextra -I$(INC) -ggdb3
 OBJ	=	$(SRC:.c=.o)
 NAME	=	mysh
