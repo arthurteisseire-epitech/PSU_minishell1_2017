@@ -9,13 +9,15 @@
 #include "mysh.h"
 #include "get_next_line.h"
 
-static int set_cmd(char **cmd)
+static int set_and_check_cmd(char **cmd)
 {
 	*cmd = get_next_line(0);
 	if (*cmd == NULL)
 		return (0);
-	if (my_strcmp(*cmd, "exit") == 0)
+	if (my_strcmp(*cmd, "exit") == 0) {
+		free(*cmd);
 		return (0);
+	}
 	return (1);
 }
 
@@ -27,7 +29,7 @@ int run(char **env)
 	while (1) {
 		if (cmd)
 			free(cmd);
-		if (!set_cmd(&cmd))
+		if (!set_and_check_cmd(&cmd))
 			return (1);
 		child_pid = fork();
 		if (child_pid == 0) {

@@ -15,7 +15,8 @@ void exec_cmd(char *cmd, char **env)
 	int status;
 	char **args = split(cmd, ' ');
 
-	status = execve(args[0], args, env);
+	if (args && args[0])
+		status = execve(args[0], args, env);
 	if (status == -1) {
 		my_putstr(args[0]);
 		my_putstr(": command not found\n");
