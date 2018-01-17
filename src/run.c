@@ -34,9 +34,12 @@ int run(char **env)
 int set_and_check_cmd(char **cmd)
 {
 	*cmd = get_next_line(0);
-	if (*cmd == NULL)
+	if (*cmd == NULL) {
+		my_putstr("exit\n");
 		return (0);
+	}
 	if (my_strcmp(*cmd, "exit") == 0) {
+		my_putstr("exit\n");
 		free(*cmd);
 		return (0);
 	}

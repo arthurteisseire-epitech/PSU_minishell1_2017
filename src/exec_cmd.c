@@ -19,7 +19,7 @@ void exec_cmd(char *cmd, char **env)
 		status = execve(args[0], args, env);
 	if (status == -1 && my_strcmp(cmd, "") != 0) {
 		my_putstr(args[0]);
-		my_putstr(": command not found\n");
+		my_putstr(": Command not found.\n");
 	}
 	while (args[i] != NULL) {
 		free(args[i]);
