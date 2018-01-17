@@ -12,7 +12,7 @@
 void exec_cmd(char *cmd, char **env)
 {
 	int i = 0;
-	int status;
+	int status = -1;
 	char **args = split(cmd, ' ');
 
 	if (args && args[0])
