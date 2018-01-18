@@ -20,5 +20,6 @@ int run(void);
 int mysh(void);
 int set_and_check_cmd(char **cmd);
 void skip_path_var(char **var);
+char *get_var_content(char *var);
 
 #endif

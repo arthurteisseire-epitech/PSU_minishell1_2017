@@ -19,7 +19,8 @@ SRC     =	$(DSRC)main.c \
 		$(DSRC)get_next_line.c \
 		$(DSRC)run.c \
 		$(DSRC)exec_cmd.c \
-		$(DSRC)skip_path_var.c \
+		$(DSRC)get_var_content.c \
+		$(DSRC)cd.c \
 		$(DSPLIT)split.c \
 		$(DSPLIT)count_words.c \
 		$(DSPLIT)get_next_word.c \
