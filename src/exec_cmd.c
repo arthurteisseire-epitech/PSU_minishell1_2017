@@ -20,11 +20,9 @@ static char *concat_with_slash(char *dest, char *src, int len_src)
 
 	if (res == NULL)
 		return (NULL);
-	if (dest != NULL) {
-		while (dest[i] != '\0') {
-			res[i] = dest[i];
-			i++;
-		}
+	while (dest[i] != '\0') {
+		res[i] = dest[i];
+		i++;
 	}
 	res[i] = '/';
 	i++;
