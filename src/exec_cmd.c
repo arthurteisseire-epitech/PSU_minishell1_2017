@@ -40,8 +40,7 @@ static char *concat_with_slash(char *dest, char *src, int len_src)
 static int exec_with_path(char **args)
 {
 	char *path = find_env("PATH");
-	char *stock = args[0];
-	int len_stock = my_strlen(stock);
+	int len_prog = my_strlen(args[0]);
 	char **paths;
 	char *cmd;
 	int i = 0;
@@ -51,10 +50,8 @@ static int exec_with_path(char **args)
 	skip_path_var(&path);
 	paths = split(path, ":");
 	while (paths[i] != NULL) {
-		cmd = concat_with_slash(paths[i], stock, len_stock);
-		args[0] = cmd;
+		cmd = concat_with_slash(paths[i], args[0], len_prog);
 		execve(cmd, args, environ);
-		args[0] = stock;
 		free(cmd);
 		i++;
 	}
