@@ -9,7 +9,7 @@
 #include "mysh.h"
 #include "get_next_line.h"
 
-int run(char **env)
+int run()
 {
 	char *cmd = NULL;
 	pid_t child_pid;
@@ -22,7 +22,7 @@ int run(char **env)
 			return (1);
 		child_pid = fork();
 		if (child_pid == 0) {
-			exec_cmd(cmd, env);
+			exec_cmd(cmd);
 			return (0);
 		} else if (child_pid == -1)
 			return (-1);

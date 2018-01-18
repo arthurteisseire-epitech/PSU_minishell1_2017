@@ -12,14 +12,12 @@ int count_words(char *str, char *flags)
 	int nb_words = 0;
 
 	while (*str != '\0') {
-		while (in_str(*str, flags)) {
+		while (in_str(*str, flags))
 			str++;
-		}
 		if (*str != '\0')
 			nb_words++;
-		while (*str != '\0' && !in_str(*str, flags)) {
+		while (*str != '\0' && !in_str(*str, flags))
 			str++;
-		}
 	}
 	return (nb_words);
 }

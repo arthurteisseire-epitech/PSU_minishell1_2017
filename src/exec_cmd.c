@@ -11,16 +11,16 @@
 #include "env.h"
 #include "get_next_line.h"
 
-void exec_cmd(char *cmd, char **env)
+void exec_cmd(char *cmd)
 {
 	int i = 0;
 	int status = -1;
 	char **args = split(cmd, " \t");
 
 	if (args && args[0])
-		status = execve(args[0], args, env);
+		status = execve(args[0], args, environ);
 	if (status == -1 && my_strcmp(args[0], "") != 0)
-		status = exec_with_path(args, env);
+		status = exec_with_path(args);
 	if (status == -1 && my_strcmp(args[0], "") != 0) {
 		my_putstr(args[0]);
 		my_putstr(": Command not found.\n");
@@ -34,9 +34,9 @@ void exec_cmd(char *cmd, char **env)
 		free(cmd);
 }
 
-int exec_with_path(char **args, char **env)
+int exec_with_path(char **args)
 {
-	char *path = find_env(env, "PATH");
+	char *path = find_env("PATH");
 	char **paths;
 	char *cmd;
 	int i = 0;
@@ -45,9 +45,8 @@ int exec_with_path(char **args, char **env)
 
 	if (!path)
 		return (0);
-	while (*path != '=') {
+	while (*path != '=')
 		path++;
-	}
 	path++;
 	paths = split(path, ":");
 	while (paths[i] != NULL) {
@@ -55,7 +54,7 @@ int exec_with_path(char **args, char **env)
 		cmd = my_realloc(cmd, "/", 1);
 		cmd = my_realloc(cmd, stock, len_stock);
 		args[0] = cmd;
-		execve(cmd, args, env);
+		execve(cmd, args, environ);
 		args[0] = stock;
 		free(cmd);
 		i++;

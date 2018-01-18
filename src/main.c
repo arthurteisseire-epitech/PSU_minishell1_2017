@@ -9,16 +9,16 @@
 #include "mysh.h"
 #include "get_next_line.h"
 
-int main(int ac, char **av, char **env)
+int main(int ac, char **av)
 {
 	int status;
 
 	if (ac != 1) {
 		my_puterror(av[0]);
-		my_puterror(": The program must take two and only two argument\n");
+		my_puterror(": The program must take one and only one argument\n");
 		return (84);
 	}
-	status = mysh(env);
+	status = mysh();
 	if (status == 0) {
 		my_puterror("An error occured during the program creation\n");
 		return (84);

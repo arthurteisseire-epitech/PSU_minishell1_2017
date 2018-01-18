@@ -8,12 +8,12 @@
 #include "my.h"
 #include "mysh.h"
 
-int mysh(char **env)
+int mysh()
 {
 	pid_t pid = getpid();
 
 	if (pid > 0) {
-		pid = run(env);
+		pid = run();
 		return (pid == -1 ? 0 : 1);
 	} else {
 		my_puterror("An error occured during the program creation\n");

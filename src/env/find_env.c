@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2017
-** File Name : find_env.c
+** File Name : find_environ.c
 ** File description:
 ** by Arthur Teisseire
 */
@@ -8,13 +8,13 @@
 #include "mysh.h"
 #include "env.h"
 
-char *find_env(char **env, char *var)
+char *find_env(char *var)
 {
 	int i = 0;
 
-	while (env[i] != NULL) {
-		if (begin_match(var, env[i]))
-			return (env[i]);
+	while (environ[i] != NULL) {
+		if (begin_match(var, environ[i]))
+			return (environ[i]);
 		i++;
 	}
 	return (NULL);

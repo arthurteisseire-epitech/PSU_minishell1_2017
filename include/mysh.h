@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2017
-** File Name : my_exec.h
+** File Name : mysh.h
 ** File description:
 ** by Arthur Teisseire
 */
@@ -13,10 +13,12 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 
-void exec_cmd(char *cmd, char **env);
-int exec_with_path(char **args, char **env);
-int run(char **env);
-int mysh(char **env);
+extern char **environ;
+
+void exec_cmd(char *cmd);
+int exec_with_path(char **args);
+int run();
+int mysh();
 int set_and_check_cmd(char **cmd);
 
 #endif
