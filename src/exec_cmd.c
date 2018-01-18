@@ -11,6 +11,56 @@
 #include "env.h"
 #include "get_next_line.h"
 
+static char *concat_with_slash(char *dest, char *src, int len_src)
+{
+	int len_dest = my_strlen(dest);
+	char *res = malloc(sizeof(char) * (len_dest + len_src + 2));
+	int i = 0;
+	int j = 0;
+
+	if (res == NULL)
+		return (NULL);
+	if (dest != NULL) {
+		while (dest[i] != '\0') {
+			res[i] = dest[i];
+			i++;
+		}
+	}
+	res[i] = '/';
+	i++;
+	while (j < len_src) {
+		res[i] = src[j];
+		j++;
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
+}
+
+static int exec_with_path(char **args)
+{
+	char *path = find_env("PATH");
+	char **paths;
+	char *cmd;
+	int i = 0;
+	char *stock = args[0];
+	int len_stock = my_strlen(stock);
+
+	if (!path)
+		return (0);
+	skip_path_var(&path);
+	paths = split(path, ":");
+	while (paths[i] != NULL) {
+		cmd = concat_with_slash(paths[i], stock, len_stock);
+		args[0] = cmd;
+		execve(cmd, args, environ);
+		args[0] = stock;
+		free(cmd);
+		i++;
+	}
+	return (-1);
+}
+
 void exec_cmd(char *cmd)
 {
 	int i = 0;
@@ -32,32 +82,4 @@ void exec_cmd(char *cmd)
 	free(args);
 	if (cmd != NULL)
 		free(cmd);
-}
-
-int exec_with_path(char **args)
-{
-	char *path = find_env("PATH");
-	char **paths;
-	char *cmd;
-	int i = 0;
-	char *stock = args[0];
-	int len_stock = my_strlen(stock);
-
-	if (!path)
-		return (0);
-	while (*path != '=')
-		path++;
-	path++;
-	paths = split(path, ":");
-	while (paths[i] != NULL) {
-		cmd = my_strdup(paths[i]);
-		cmd = my_realloc(cmd, "/", 1);
-		cmd = my_realloc(cmd, stock, len_stock);
-		args[0] = cmd;
-		execve(cmd, args, environ);
-		args[0] = stock;
-		free(cmd);
-		i++;
-	}
-	return (-1);
 }
