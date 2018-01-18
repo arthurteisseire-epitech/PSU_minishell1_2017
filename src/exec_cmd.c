@@ -40,11 +40,11 @@ static char *concat_with_slash(char *dest, char *src, int len_src)
 static int exec_with_path(char **args)
 {
 	char *path = find_env("PATH");
+	char *stock = args[0];
+	int len_stock = my_strlen(stock);
 	char **paths;
 	char *cmd;
 	int i = 0;
-	char *stock = args[0];
-	int len_stock = my_strlen(stock);
 
 	if (!path)
 		return (0);
@@ -71,7 +71,8 @@ void exec_cmd(char *cmd)
 		status = execve(args[0], args, environ);
 	if (status == -1 && my_strcmp(args[0], "") != 0)
 		status = exec_with_path(args);
-	if (status == -1 && my_strcmp(args[0], "") != 0) {
+	printf("'%s'\n", args[0]);
+	if (status == -1 && args[0] != NULL) {
 		my_putstr(args[0]);
 		my_putstr(": Command not found.\n");
 	}
@@ -80,6 +81,6 @@ void exec_cmd(char *cmd)
 		i++;
 	}
 	free(args);
-	if (cmd != NULL)
+	if (cmd)
 		free(cmd);
 }
