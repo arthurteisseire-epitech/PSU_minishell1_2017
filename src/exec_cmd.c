@@ -71,7 +71,6 @@ void exec_cmd(char *cmd)
 		status = execve(args[0], args, environ);
 	if (status == -1 && my_strcmp(args[0], "") != 0)
 		status = exec_with_path(args);
-	printf("'%s'\n", args[0]);
 	if (status == -1 && args[0] != NULL) {
 		my_putstr(args[0]);
 		my_putstr(": Command not found.\n");
