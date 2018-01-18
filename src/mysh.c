@@ -8,7 +8,7 @@
 #include "my.h"
 #include "mysh.h"
 
-int mysh()
+int mysh(void)
 {
 	pid_t pid = getpid();
 

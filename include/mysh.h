@@ -17,8 +17,8 @@ extern char **environ;
 
 void exec_cmd(char *cmd);
 int exec_with_path(char **args);
-int run();
-int mysh();
+int run(void);
+int mysh(void);
 int set_and_check_cmd(char **cmd);
 
 #endif

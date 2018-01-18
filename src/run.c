@@ -9,7 +9,7 @@
 #include "mysh.h"
 #include "get_next_line.h"
 
-int run()
+int run(void)
 {
 	char *cmd = NULL;
 	pid_t child_pid;
