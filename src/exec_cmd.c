@@ -10,6 +10,7 @@
 #include "split.h"
 #include "env.h"
 #include "get_next_line.h"
+#include "builtins.h"
 
 static char *concat_with_slash(char *dest, char *src, int len_src)
 {
@@ -45,20 +46,35 @@ static int exec_with_path(char **args)
 
 	if (!path)
 		return (0);
+	if (exec_builtins(args))
+		return (0);
 	skip_path_var(&path);
 	paths = split(path, ":");
 	while (paths[i] != NULL) {
 		cmd = concat_with_slash(paths[i], args[0], len_prog);
 		execve(cmd, args, environ);
-		free(cmd);
+		if (cmd)
+			free(cmd);
 		i++;
 	}
 	return (-1);
 }
 
-void exec_cmd(char *cmd)
+static void free_args(char **args, char *cmd)
 {
 	int i = 0;
+
+	while (args[i] != NULL) {
+		free(args[i]);
+		i++;
+	}
+	free(args);
+	if (cmd)
+		free(cmd);
+}
+
+void exec_cmd(char *cmd)
+{
 	int status = -1;
 	char **args = split(cmd, " \t");
 
@@ -70,11 +86,5 @@ void exec_cmd(char *cmd)
 		my_putstr(args[0]);
 		my_putstr(": Command not found.\n");
 	}
-	while (args[i] != NULL) {
-		free(args[i]);
-		i++;
-	}
-	free(args);
-	if (cmd)
-		free(cmd);
+	free_args(args, cmd);
 }

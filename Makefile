@@ -14,13 +14,13 @@ LIB	=	my
 LIBS	=	-L$(DLIB) -l$(LIB)
 DSPLIT	=	$(DSRC)split/
 DENV	=	$(DSRC)env/
+DBUILTS	=	$(DSRC)builtins/
 SRC     =	$(DSRC)main.c \
 		$(DSRC)mysh.c \
 		$(DSRC)get_next_line.c \
 		$(DSRC)run.c \
 		$(DSRC)exec_cmd.c \
 		$(DSRC)get_var_content.c \
-		$(DSRC)cd.c \
 		$(DSPLIT)split.c \
 		$(DSPLIT)count_words.c \
 		$(DSPLIT)get_next_word.c \
@@ -28,7 +28,9 @@ SRC     =	$(DSRC)main.c \
 		$(DSPLIT)len_first_word.c \
 		$(DSPLIT)my_strncpy.c \
 		$(DSPLIT)skip_first_flags.c \
-		$(DENV)find_env.c
+		$(DENV)find_env.c \
+		$(DBUILTS)cd.c \
+		$(DBUILTS)exec_builtins.c
 CFLAGS	=	-Wall -W -Wextra -I$(INC) -g
 OBJ	=	$(SRC:.c=.o)
 NAME	=	mysh
