@@ -11,6 +11,7 @@ int my_strncmp(char const *s1, char const *s2, int n)
 {
 	int i = 0;
 
+	n--;
 	if (s1 == NULL || s2 == NULL)
 		return (-1);
 	while (s1[i] == s2[i] && i < n)

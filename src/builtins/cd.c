@@ -25,19 +25,13 @@ int cd(char **args)
 		return (-1);
 	while (args[i] != NULL)
 		i++;
-	printf("%d\n", i);
-	if (i == 1) {
-		printf("%s\n", get_var_content("HOME"));
+	if (i == 1)
 		return (chdir(get_var_content("HOME")));
-	}
 	else if (i != 2) {
 		my_puterror("cd: Too many arguments.");
 		return (-1);
 	}
-	printf("%s\n", get_var_content("PWD"));
-	if (my_strcmp(args[1], "-") == 0) {
+	if (my_strcmp(args[1], "-") == 0)
 		return (chdir(get_var_content("OLDPWD")));
-	}
-	printf("%s\n", get_var_content("HOME"));
 	return (chdir(args[1]));
 }

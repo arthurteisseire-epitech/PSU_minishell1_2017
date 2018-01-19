@@ -21,13 +21,8 @@ char *get_var_content(char *var)
 	int i = 0;
 	int j = 0;
 
-	printf("var: %s\n", var);
-	while (my_strncmp(var, environ[i], 2) != 0 && environ[i]) {
-		printf("%s\n", environ[i]);
+	while (my_strncmp(var, environ[i], len_var) != 0 && environ[i])
 		i++;
-	}
-	printf("environ fin : %s\n", environ[i]);
-	printf("index env var: %d\n", i);
 	while (environ[i][j] != '=')
 		j++;
 	j++;
