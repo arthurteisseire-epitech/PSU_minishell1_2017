@@ -8,8 +8,6 @@
 #ifndef LK_LIST_H
 #define LK_LIST_H
 
-#include <stdlib.h>
-
 typedef struct lk_list {
 	char *name;
 	char *value;
@@ -22,11 +20,11 @@ typedef struct control {
 	lk_list_t *tmp;
 } control_t;
 
-void init_list(control_t *list);
+void init_list(void);
 void free_node(lk_list_t *node);
-void free_list(control_t *list);
-int head(char **args, control_t *list);
-lk_list_t *find_prev(char *name, control_t *list);
-int delete_node(char *name, control_t *list);
+void free_env(void);
+int head(char **args);
+lk_list_t *find_prev(char *name);
+int delete_node(char *name);
 
 #endif

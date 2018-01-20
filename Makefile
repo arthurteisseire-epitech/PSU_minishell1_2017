@@ -33,7 +33,7 @@ SRC     =	$(DSRC)main.c \
 		$(DENV)find_env.c \
 		$(DENV)env.c \
 		$(DENV)lk_list.c \
-		$(DENV)free_list.c \
+		$(DENV)free_env.c \
 		$(DBUILTS)cd.c \
 		$(DBUILTS)exec_builtins.c
 CFLAGS	=	-Wall -W -Wextra -I$(INC) -g

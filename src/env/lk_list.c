@@ -6,16 +6,16 @@
 */
 
 #include "my.h"
-#include "lk_list.h"
+#include "mysh.h"
 
-void init_list(control_t *list)
+void init_list(void)
 {
-	list->begin = NULL;
-	list->end = NULL;
-	list->tmp = NULL;
+	env->begin = NULL;
+	env->end = NULL;
+	env->tmp = NULL;
 }
 
-int head(char **args, control_t *list)
+int head(char **args)
 {
 	lk_list_t *new = malloc(sizeof(lk_list_t));
 
@@ -27,22 +27,22 @@ int head(char **args, control_t *list)
 	else
 		new->value = NULL;
 	new->next = NULL;
-	if (list->end) {
-		list->end->next = new;
-		list->end = new;
+	if (env->end) {
+		env->end->next = new;
+		env->end = new;
 	} else {
-		list->end = new;
-		list->begin = new;
+		env->end = new;
+		env->begin = new;
 	}
 	return (0);
 }
 
-lk_list_t *find_prev(char *name, control_t *list)
+lk_list_t *find_prev(char *name)
 {
-	lk_list_t *curr = list->begin;
-	lk_list_t *prev = list->begin;
+	lk_list_t *curr = env->begin;
+	lk_list_t *prev = env->begin;
 
-	if (list->begin)
+	if (env->begin)
 		curr = curr->next;
 	while (curr != NULL) {
 		if (my_strcmp(curr->name, name) != 0)
@@ -53,18 +53,18 @@ lk_list_t *find_prev(char *name, control_t *list)
 	return (NULL);
 }
 
-int delete_node(char *name, control_t *list)
+int delete_node(char *name)
 {
-	lk_list_t *prev = find_prev(name, list);
+	lk_list_t *prev = find_prev(name);
 
 	if (prev == NULL) {
-		if (list->begin && my_strcmp(name, list->begin->name) == 0)
-			free_list(list);
+		if (env->begin && my_strcmp(name, env->begin->name) == 0)
+			free_env();
 		return (0);
 	}
-	list->tmp = prev->next;
+	env->tmp = prev->next;
 	prev->next = prev->next->next;
-	free_node(list->tmp);
-	list->tmp = NULL;
+	free_node(env->tmp);
+	env->tmp = NULL;
 	return (0);
 }

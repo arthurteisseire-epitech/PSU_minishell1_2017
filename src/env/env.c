@@ -7,22 +7,19 @@
 
 #include "my.h"
 #include "mysh.h"
-#include "lk_list.h"
 #include "env.h"
 #include "split.h"
-
-static control_t *env;
 
 int init_env(void)
 {
 	int i = 0;
 	char **args;
 
-	init_list(env);
+	init_list();
 	while (environ[i] != NULL) {
 		args = split(environ[i], "=");
 		if (args) {
-			head(args, env);
+			head(args);
 			free_args(args);
 		}
 		else
@@ -43,7 +40,7 @@ int my_setenv(char **args)
 		my_puterror("setenv: Too many arguments.\n");
 		return (-1);
 	}
-	head(args, env);
+	head(args);
 	return (0);
 }
 
@@ -53,7 +50,7 @@ int my_unsetenv(char **args)
 		my_puterror("unsetenv: Too few arguments.\n");
 		return (-1);
 	}
-	delete_node(args[1], env);
+	delete_node(args[1]);
 	return (0);
 }
 
