@@ -26,12 +26,12 @@ int cd(char **args)
 	while (args[i] != NULL)
 		i++;
 	if (i == 1)
-		return (chdir(get_var_content("HOME")));
+		return (chdir(get_value("HOME")));
 	else if (i != 2) {
 		my_puterror("cd: Too many arguments.");
 		return (-1);
 	}
 	if (my_strcmp(args[1], "-") == 0)
-		return (chdir(get_var_content("OLDPWD")));
+		return (chdir(get_value("OLDPWD")));
 	return (chdir(args[1]));
 }

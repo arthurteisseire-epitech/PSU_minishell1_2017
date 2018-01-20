@@ -8,6 +8,18 @@
 #include "mysh.h"
 #include "env.h"
 
+static int begin_match(char *str1, char *str2)
+{
+	int i = 0;
+
+	while (str1[i] != '\0') {
+		if (str1[i] != str2[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 char *find_env(char *var)
 {
 	int i = 0;
@@ -18,16 +30,4 @@ char *find_env(char *var)
 		i++;
 	}
 	return (NULL);
-}
-
-int begin_match(char *str1, char *str2)
-{
-	int i = 0;
-
-	while (str1[i] != '\0') {
-		if (str1[i] != str2[i])
-			return (0);
-		i++;
-	}
-	return (1);
 }

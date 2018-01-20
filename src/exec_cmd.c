@@ -48,7 +48,7 @@ static int exec_with_path(char **args)
 		return (0);
 	if (exec_builtins(args))
 		return (0);
-	skip_path_var(&path);
+	skip_name(&path);
 	paths = split(path, ":");
 	while (paths[i] != NULL) {
 		cmd = concat_with_slash(paths[i], args[0], len_prog);
@@ -58,19 +58,6 @@ static int exec_with_path(char **args)
 		i++;
 	}
 	return (-1);
-}
-
-static void free_args(char **args, char *cmd)
-{
-	int i = 0;
-
-	while (args[i] != NULL) {
-		free(args[i]);
-		i++;
-	}
-	free(args);
-	if (cmd)
-		free(cmd);
 }
 
 void exec_cmd(char *cmd)
@@ -86,5 +73,7 @@ void exec_cmd(char *cmd)
 		my_putstr(args[0]);
 		my_putstr(": Command not found.\n");
 	}
-	free_args(args, cmd);
+	free_args(args);
+	if (cmd)
+		free(cmd);
 }

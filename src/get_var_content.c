@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2017
-** File Name : get_var_content.c
+** File Name : get_name_content.c
 ** File description:
 ** by Arthur Teisseire
 */
@@ -8,20 +8,20 @@
 #include "my.h"
 #include "mysh.h"
 
-void skip_path_var(char **var)
+void skip_name(char **name)
 {
-	while (**var != '=')
-		(*var)++;
-	(*var)++;
+	while (**name != '=')
+		(*name)++;
+	(*name)++;
 }
 
-char *get_var_content(char *var)
+char *get_value(char *name)
 {
-	int len_var = my_strlen(var);
+	int len_name = my_strlen(name);
 	int i = 0;
 	int j = 0;
 
-	while (my_strncmp(var, environ[i], len_var) != 0 && environ[i])
+	while (my_strncmp(name, environ[i], len_name) != 0 && environ[i])
 		i++;
 	while (environ[i][j] != '=')
 		j++;

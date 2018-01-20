@@ -9,6 +9,10 @@
 #define ENV_H
 
 char *find_env(char *var);
-int begin_match(char *str1, char *str2);
+
+int init_env(void);
+int my_setenv(char **args);
+int my_unsetenv(char **args);
+void my_env(void);
 
 #endif

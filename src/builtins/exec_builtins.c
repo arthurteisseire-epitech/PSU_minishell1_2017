@@ -15,14 +15,10 @@ static const builtins_t builtins[NB_BUILTINS] = {
 
 int exec_builtins(char **args)
 {
-	int i = 0;
-
-	while (i < NB_BUILTINS) {
+	for (int i = 0; i < NB_BUILTINS; i++)
 		if (my_strcmp(builtins[i].name, args[0]) == 0) {
 			builtins[i].f(args);
 			return (1);
 		}
-		i++;
-	}
 	return (0);
 }

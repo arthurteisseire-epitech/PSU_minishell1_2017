@@ -19,7 +19,9 @@ void exec_cmd(char *cmd);
 int run(void);
 int mysh(void);
 int set_and_check_cmd(char **cmd);
-void skip_path_var(char **var);
-char *get_var_content(char *var);
+void skip_name(char **var);
+char *get_value(char *var);
+int count_args(char **args);
+void free_args(char **args);
 
 #endif

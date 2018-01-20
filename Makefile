@@ -21,6 +21,8 @@ SRC     =	$(DSRC)main.c \
 		$(DSRC)run.c \
 		$(DSRC)exec_cmd.c \
 		$(DSRC)get_var_content.c \
+		$(DSRC)count_args.c \
+		$(DSRC)free_args.c \
 		$(DSPLIT)split.c \
 		$(DSPLIT)count_words.c \
 		$(DSPLIT)get_next_word.c \
@@ -29,6 +31,9 @@ SRC     =	$(DSRC)main.c \
 		$(DSPLIT)my_strncpy.c \
 		$(DSPLIT)skip_first_flags.c \
 		$(DENV)find_env.c \
+		$(DENV)env.c \
+		$(DENV)lk_list.c \
+		$(DENV)free_list.c \
 		$(DBUILTS)cd.c \
 		$(DBUILTS)exec_builtins.c
 CFLAGS	=	-Wall -W -Wextra -I$(INC) -g
