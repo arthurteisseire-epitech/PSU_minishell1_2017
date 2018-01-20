@@ -22,5 +22,4 @@ void free_env(void)
 		env->begin = env->begin->next;
 		free_node(env->tmp);
 	}
-	init_env();
 }

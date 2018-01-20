@@ -10,6 +10,7 @@
 
 void init_list(void)
 {
+	env = malloc(sizeof(control_t));
 	env->begin = NULL;
 	env->end = NULL;
 	env->tmp = NULL;
@@ -21,9 +22,9 @@ int head(char **args)
 
 	if (new == NULL)
 		return (-1);
-	new->name = my_strdup(args[1]);
-	if (args[2])
-		new->value = my_strdup(args[2]);
+	new->name = my_strdup(args[0]);
+	if (args[1])
+		new->value = my_strdup(args[1]);
 	else
 		new->value = NULL;
 	new->next = NULL;

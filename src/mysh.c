@@ -7,11 +7,13 @@
 
 #include "my.h"
 #include "mysh.h"
+#include "env.h"
 
 int mysh(void)
 {
 	pid_t pid = getpid();
 
+	init_env();
 	if (pid > 0) {
 		pid = run();
 		return (pid == -1 ? 0 : 1);

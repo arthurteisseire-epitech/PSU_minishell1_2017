@@ -36,7 +36,7 @@ SRC     =	$(DSRC)main.c \
 		$(DENV)free_env.c \
 		$(DBUILTS)cd.c \
 		$(DBUILTS)exec_builtins.c
-CFLAGS	=	-Wall -W -Wextra -I$(INC) -g
+CFLAGS	=	-Wall -W -Wextra -I$(INC) -ggdb3
 OBJ	=	$(SRC:.c=.o)
 NAME	=	mysh
 

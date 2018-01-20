@@ -21,8 +21,7 @@ int init_env(void)
 		if (args) {
 			head(args);
 			free_args(args);
-		}
-		else
+		} else
 			return (-1);
 		i++;
 	}
