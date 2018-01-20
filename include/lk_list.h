@@ -20,6 +20,8 @@ typedef struct control {
 	lk_list_t *tmp;
 } control_t;
 
+extern control_t *env;
+
 void init_list(void);
 void free_node(lk_list_t *node);
 void free_env(void);

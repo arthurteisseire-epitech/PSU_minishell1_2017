@@ -9,6 +9,7 @@
 #include "mysh.h"
 #include "env.h"
 #include "split.h"
+#include "lk_list.h"
 
 int init_env(void)
 {
@@ -70,3 +71,5 @@ int my_env(char **args)
 	}
 	return (0);
 }
+
+

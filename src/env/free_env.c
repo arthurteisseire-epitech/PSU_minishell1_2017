@@ -6,6 +6,7 @@
 */
 
 #include "mysh.h"
+#include "lk_list.h"
 #include "env.h"
 
 void free_node(lk_list_t *node)

@@ -7,6 +7,7 @@
 
 #include "my.h"
 #include "mysh.h"
+#include "lk_list.h"
 
 void init_list(void)
 {
@@ -46,7 +47,7 @@ lk_list_t *find_prev(char *name)
 	if (env->begin)
 		curr = curr->next;
 	while (curr != NULL) {
-		if (my_strcmp(curr->name, name) != 0)
+		if (my_strcmp(curr->name, name) == 0)
 			return (prev);
 		prev = curr;
 		curr = curr->next;

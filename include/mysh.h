@@ -12,10 +12,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/wait.h>
-#include "lk_list.h"
 
 extern char **environ;
-control_t *env;
 
 void exec_cmd(char *cmd);
 int run(void);
