@@ -37,7 +37,7 @@ int my_setenv(char **args)
 	int nb_args = count_args(args);
 
 	if (nb_args == 1) {
-		my_env();
+		my_env(args);
 		return (0);
 	} else if (nb_args >= 4) {
 		my_puterror("setenv: Too many arguments.");
@@ -53,14 +53,16 @@ int my_unsetenv(char **args)
 		my_puterror("unsetenv: Too few arguments.");
 		return (-1);
 	}
-	remove(args[1], env);
+	delete_node(args[1], env);
 	return (0);
 }
 
-void my_env(void)
+void my_env(char **args)
 {
 	lk_list_t *curr = env->begin;
 
+	if (args[1])
+		perror(args[1]);
 	while (curr != NULL) {
 		my_putstr(curr->name);
 		my_putchar('=');

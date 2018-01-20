@@ -27,6 +27,6 @@ void free_node(lk_list_t *node);
 void free_list(control_t *list);
 int head(char **args, control_t *list);
 lk_list_t *find_prev(char *name, control_t *list);
-int remove(char *name, control_t *list);
+int delete_node(char *name, control_t *list);
 
 #endif

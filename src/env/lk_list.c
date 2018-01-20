@@ -53,7 +53,7 @@ lk_list_t *find_prev(char *name, control_t *list)
 	return (NULL);
 }
 
-int remove(char *name, control_t *list)
+int delete_node(char *name, control_t *list)
 {
 	lk_list_t *prev = find_prev(name, list);
 
