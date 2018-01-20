@@ -10,7 +10,7 @@
 
 #include <fcntl.h>
 
-#define NB_BUILTINS 1
+#define NB_BUILTINS 4
 
 typedef struct builtins {
 	char *name;

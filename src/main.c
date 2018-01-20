@@ -15,12 +15,12 @@ int main(int ac, char **av)
 
 	if (ac != 1) {
 		my_puterror(av[0]);
-		my_puterror(": The program must take one and only one argument\n");
+		my_puterror(": The program must take one argument\n");
 		return (84);
 	}
 	status = mysh();
 	if (status == 0) {
-		my_puterror("An error occured during the program creation\n");
+		my_puterror("An error occured\n");
 		return (84);
 	}
 	return (0);

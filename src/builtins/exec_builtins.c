@@ -8,9 +8,13 @@
 #include "my.h"
 #include "mysh.h"
 #include "builtins.h"
+#include "env.h"
 
 static const builtins_t builtins[NB_BUILTINS] = {
-	{"cd", cd}
+	{"cd", cd},
+	{"env", my_env},
+	{"unsetenv", my_unsetenv},
+	{"setenv", my_setenv}
 };
 
 int exec_builtins(char **args)
