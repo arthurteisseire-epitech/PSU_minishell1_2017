@@ -10,9 +10,9 @@
 
 void skip_path_var(char **var)
 {
-        while (**var != '=')
-                (*var)++;
-        (*var)++;
+	while (**var != '=')
+		(*var)++;
+	(*var)++;
 }
 
 char *get_var_content(char *var)

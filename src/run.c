@@ -27,7 +27,7 @@ int run(void)
 		} else if (child_pid == -1)
 			return (-1);
 		wait(NULL);
-	} 
+	}
 	return (1);
 }
 

@@ -18,10 +18,8 @@ int exec_builtins(char **args)
 	int i = 0;
 
 	while (i < NB_BUILTINS) {
-		printf("builtins_name: '%s', args[0]: '%s'\n", builtins[i].name, args[0]);
 		if (my_strcmp(builtins[i].name, args[0]) == 0) {
 			builtins[i].f(args);
-			printf("In cd\n");
 			return (1);
 		}
 		i++;

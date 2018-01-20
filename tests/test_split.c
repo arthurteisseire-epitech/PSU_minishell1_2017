@@ -12,8 +12,8 @@
 
 Test(split, get_next_word)
 {
-	char *got1 = my_strdup("lala         toto");
-	char *got2 = my_strdup("     lala         toto      ");
+	char *got1 = my_strdup("lala	 toto");
+	char *got2 = my_strdup("     lala	 toto      ");
 	char *res;
 
 	res = get_next_word(&got1, " ");
