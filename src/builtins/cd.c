@@ -51,14 +51,18 @@ int cd(char **args)
 		return (-1);
 	while (args[i] != NULL)
 		i++;
-	if (i != 2 && i != 1) {
-		my_puterror("cd: Too many arguments.");
+	if (i >= 3) {
+		my_puterror("cd: Too many arguments.\n");
 		return (-1);
-	} else if (i == 1)
+	} 
+	if (i == 1)
 		status = chdir(get_value("HOME"));
-	if (my_strcmp(args[1], "-") == 0)
+	else if (my_strcmp(args[1], "-") == 0)
 		status = chdir(get_value("OLDPWD"));
-	status = chdir(args[1]);
+	else
+		status = chdir(args[1]);
+	if (status == -1)
+		perror(args[1]);
 	set_env_pwd();
 	return (status);
 }
