@@ -16,5 +16,6 @@ int init_env(void);
 int my_setenv(char **args);
 int my_unsetenv(char **args);
 int my_env(char **args);
+char **env_to_array(void);
 
 #endif

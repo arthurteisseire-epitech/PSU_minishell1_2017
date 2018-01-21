@@ -36,7 +36,7 @@ static char *concat_with_slash(char *dest, char *src, int len_src)
 	return (res);
 }
 
-static int exec_with_path(char **args)
+static int exec_with_path(char **args, char **envp)
 {
 	char *path = get_value("PATH");
 	int len_prog = my_strlen(args[0]);
@@ -49,7 +49,7 @@ static int exec_with_path(char **args)
 	paths = split(path, ":");
 	while (paths[i] != NULL) {
 		cmd = concat_with_slash(paths[i], args[0], len_prog);
-		execve(cmd, args, environ);
+		execve(cmd, args, envp);
 		if (cmd)
 			free(cmd);
 		i++;
@@ -60,11 +60,12 @@ static int exec_with_path(char **args)
 void exec_cmd(char *cmd, char **args)
 {
 	int status = -1;
+	char **envp = env_to_array();
 
 	if (args && args[0])
 		status = execve(args[0], args, environ);
 	if (status == -1 && my_strcmp(args[0], "") != 0)
-		status = exec_with_path(args);
+		status = exec_with_path(args, envp);
 	if (status == -1 && args[0] != NULL) {
 		my_putstr(args[0]);
 		my_putstr(": Command not found.\n");
