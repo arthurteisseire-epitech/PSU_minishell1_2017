@@ -39,7 +39,6 @@ static void set_env_pwd(void)
 	char *old_pwd[3] = {"OLDPWD", NULL, NULL};
 
 	new_pwd[1] = get_path();
-	printf("%s\n", new_pwd[1]);
 	old_pwd[1] = get_value("PWD");
 	head(new_pwd);
 	head(old_pwd);
