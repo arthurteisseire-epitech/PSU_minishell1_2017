@@ -55,26 +55,3 @@ int delete_node(char *name)
 	env->tmp = NULL;
 	return (0);
 }
-
-char **env_to_array(void)
-{
-	int i = 0;
-	int len_env = 0;
-	lk_list_t *curr = env->begin;
-	char **array;
-
-	while (curr != NULL) {
-		len_env++;
-		curr = curr->next;
-	}
-	array = malloc(sizeof(char *) * (len_env + 1));
-	if (array == NULL)
-		return (NULL);
-	array[len_env] = NULL;
-	curr = env->begin;
-	while (curr != NULL) {
-		array[i] = my_realloc(curr->name, curr->value, my_strlen(curr->value));
-		curr = curr->next;
-	}
-	return (array);
-}

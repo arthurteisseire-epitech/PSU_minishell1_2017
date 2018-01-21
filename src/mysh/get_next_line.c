@@ -59,6 +59,7 @@ char *my_realloc(char *dest, char *src, int len_src)
 			res[i] = dest[i];
 			i++;
 		}
+		free(dest);
 	}
 	i = 0;
 	while (i < len_src) {
