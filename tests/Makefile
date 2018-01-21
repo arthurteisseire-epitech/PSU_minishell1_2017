@@ -16,8 +16,16 @@ LIBS	=	-L$(DLIB) -l$(LIB)
 DTOOLS	=	$(DSRC)tools/
 
 SRC_UT	=	$(DSRC_UT)test_split.c
-SRC     =	$(DSRC)get_next_line.c \
-		$(DTOOLS)split.c
+DSPLIT	=	$(DSRC)split/
+DMYSH	=	$(DSRC)mysh/
+SRC     =	$(DMYSH)get_next_line.c \
+		$(DSPLIT)split.c \
+		$(DSPLIT)count_words.c \
+		$(DSPLIT)get_next_word.c \
+		$(DSPLIT)in_str.c \
+		$(DSPLIT)len_first_word.c \
+		$(DSPLIT)my_strncpy.c \
+		$(DSPLIT)skip_first_flags.c
 
 CFLAGS	=	-Wall -W -Wextra --coverage -I$(INC)
 LDFLAGS	=	-lcriterion -lgcov

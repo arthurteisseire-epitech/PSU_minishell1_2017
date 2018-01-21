@@ -7,21 +7,18 @@
 
 #include <criterion/criterion.h>
 #include "mysh.h"
-#include "tools.h"
+#include "split.h"
 #include "my.h"
 
 Test(split, get_next_word)
 {
-	char *got1 = my_strdup("lala	 toto");
-	char *got2 = my_strdup("     lala	 toto      ");
+	char *got = "     lala	 toto      ";
 	char *res;
 
-	res = get_next_word(&got1, " ");
-	cr_assert_str_eq(res, "lala");
-	get_next_word(&got2, " ");
-	res = get_next_word(&got2, " ");
+	get_next_word(&got, " ");
+	res = get_next_word(&got, " ");
 	cr_assert_str_eq(res, "toto");
-	res = get_next_word(&got2, " ");
+	res = get_next_word(&got, " ");
 	cr_assert_eq(res, NULL);
 }
 
