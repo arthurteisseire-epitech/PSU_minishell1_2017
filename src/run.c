@@ -11,12 +11,12 @@
 #include "split.h"
 #include "builtins.h"
 
-static void fork_and_exec(char *cmd)
+static void fork_and_exec(char *cmd, char **args)
 {
 	pid_t child_pid = fork();
 
 	if (child_pid == 0) {
-		exec_cmd(cmd);
+		exec_cmd(cmd, args);
 		return;
 	} else if (child_pid == -1)
 		return;
@@ -36,7 +36,7 @@ int run(void)
 			return (1);
 		args = split(cmd, " \t");
 		if (!exec_builtins(args))
-			fork_and_exec(cmd);
+			fork_and_exec(cmd, args);
 	}
 	return (1);
 }

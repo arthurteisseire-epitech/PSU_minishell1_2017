@@ -58,10 +58,9 @@ static int exec_with_path(char **args)
 	return (-1);
 }
 
-void exec_cmd(char *cmd)
+void exec_cmd(char *cmd, char **args)
 {
 	int status = -1;
-	char **args = split(cmd, " \t");
 
 	if (args && args[0])
 		status = execve(args[0], args, environ);
