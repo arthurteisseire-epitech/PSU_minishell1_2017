@@ -15,13 +15,15 @@ LIBS	=	-L$(DLIB) -l$(LIB)
 DSPLIT	=	$(DSRC)split/
 DENV	=	$(DSRC)env/
 DBUILTS	=	$(DSRC)builtins/
+DMYSH	=	$(DSRC)mysh/
+DARGS	=	$(DSRC)args/
 SRC     =	$(DSRC)main.c \
-		$(DSRC)mysh.c \
-		$(DSRC)get_next_line.c \
-		$(DSRC)run.c \
-		$(DSRC)exec_cmd.c \
-		$(DSRC)count_args.c \
-		$(DSRC)free_args.c \
+		$(DMYSH)mysh.c \
+		$(DMYSH)get_next_line.c \
+		$(DMYSH)run.c \
+		$(DMYSH)exec_cmd.c \
+		$(DARGS)count_args.c \
+		$(DARGS)free_args.c \
 		$(DSPLIT)split.c \
 		$(DSPLIT)count_words.c \
 		$(DSPLIT)get_next_word.c \
