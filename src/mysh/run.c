@@ -16,6 +16,7 @@ int run(void)
 	char *cmd = NULL;
 	char **args;
 	pid_t child_pid;
+	int wstatus;
 
 	while (1) {
 		my_putstr("$> ");
@@ -31,7 +32,9 @@ int run(void)
 				return (0);
 			} else if (child_pid == -1)
 				return (-1);
-			wait(NULL);
+			wait(&wstatus);
+			if (WTERMSIG(wstatus) == 11)
+				my_puterror("Segmentation fault (core dumped)\n");
 		}
 	}
 	return (1);
