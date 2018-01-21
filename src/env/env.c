@@ -40,7 +40,7 @@ int my_setenv(char **args)
 		my_puterror("setenv: Too many arguments.\n");
 		return (-1);
 	}
-	head(args);
+	head(&args[1]);
 	return (0);
 }
 

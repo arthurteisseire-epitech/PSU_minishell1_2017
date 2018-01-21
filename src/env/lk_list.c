@@ -68,6 +68,8 @@ int delete_node(char *name)
 		}
 		return (0);
 	}
+	if (prev->next->next == NULL)
+		env->end = prev;
 	env->tmp = prev->next;
 	prev->next = prev->next->next;
 	free_node(env->tmp);
