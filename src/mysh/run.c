@@ -11,12 +11,29 @@
 #include "split.h"
 #include "builtins.h"
 
+static int fork_and_exec(char **args, char *cmd)
+{
+	pid_t child_pid;
+	int wstatus;
+
+	if (!exec_builtins(args)) {
+		child_pid = fork();
+		if (child_pid == 0) {
+			exec_cmd(cmd, args);
+			return (0);
+		} else if (child_pid == -1)
+			return (-1);
+		wait(&wstatus);
+		if (WTERMSIG(wstatus) == 11)
+			my_puterror("Segmentation fault (core dumped)\n");
+	}
+	return (1);
+}
+
 int run(void)
 {
 	char *cmd = NULL;
 	char **args;
-	pid_t child_pid;
-	int wstatus;
 
 	while (1) {
 		my_putstr("$> ");
@@ -25,17 +42,8 @@ int run(void)
 		if (set_and_check_cmd(&cmd) == 0)
 			return (1);
 		args = split(cmd, " \t");
-		if (!exec_builtins(args)) {
-			child_pid = fork();
-			if (child_pid == 0) {
-				exec_cmd(cmd, args);
-				return (0);
-			} else if (child_pid == -1)
-				return (-1);
-			wait(&wstatus);
-			if (WTERMSIG(wstatus) == 11)
-				my_puterror("Segmentation fault (core dumped)\n");
-		}
+		if (fork_and_exec(args, cmd) != 1)
+			return (0);
 	}
 	return (1);
 }
