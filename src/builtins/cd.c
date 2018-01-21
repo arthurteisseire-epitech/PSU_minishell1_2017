@@ -23,9 +23,11 @@ static char *get_path(void)
 	char buff[4096];
 	char *path;
 
+	for (int i = 0; i < 4096; i++)
+		buff[i] = '\0';
 	if (buff == NULL)
 		return (NULL);
-	if ((path = getcwd(buff, sizeof(buff))) != NULL)
+	if ((path = my_strdup(getcwd(buff, sizeof(buff)))) != NULL)
 		return (path);
 	my_puterror("Path too long.\n");
 	return (NULL);
@@ -37,6 +39,7 @@ static void set_env_pwd(void)
 	char *old_pwd[3] = {"OLDPWD", NULL, NULL};
 
 	new_pwd[1] = get_path();
+	printf("%s\n", new_pwd[1]);
 	old_pwd[1] = get_value("PWD");
 	head(new_pwd);
 	head(old_pwd);
