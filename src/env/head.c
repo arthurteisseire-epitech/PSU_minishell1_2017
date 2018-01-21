@@ -52,3 +52,12 @@ lk_list_t *find_node(char *name)
 	}
 	return (NULL);
 }
+
+char *get_value(char *name)
+{
+	lk_list_t *node = find_node(name);
+
+	if (node)
+		return (node->value);
+	return (NULL);
+}
