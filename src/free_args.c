@@ -15,4 +15,5 @@ void free_args(char **args)
 		free(args[i]);
 		i++;
 	}
+	free(args);
 }

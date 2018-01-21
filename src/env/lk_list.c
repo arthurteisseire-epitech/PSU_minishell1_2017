@@ -17,28 +17,6 @@ void init_list(void)
 	env->tmp = NULL;
 }
 
-int head(char **args)
-{
-	lk_list_t *new = malloc(sizeof(lk_list_t));
-
-	if (new == NULL)
-		return (-1);
-	new->name = my_strdup(args[0]);
-	if (args[1])
-		new->value = my_strdup(args[1]);
-	else
-		new->value = NULL;
-	new->next = NULL;
-	if (env->end) {
-		env->end->next = new;
-		env->end = new;
-	} else {
-		env->end = new;
-		env->begin = new;
-	}
-	return (0);
-}
-
 lk_list_t *find_prev(char *name)
 {
 	lk_list_t *curr = env->begin;

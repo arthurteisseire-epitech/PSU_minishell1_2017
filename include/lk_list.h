@@ -27,6 +27,7 @@ void free_node(lk_list_t *node);
 void free_env(void);
 int head(char **args);
 lk_list_t *find_prev(char *name);
+lk_list_t *find_node(char *name);
 int delete_node(char *name);
 
 #endif
