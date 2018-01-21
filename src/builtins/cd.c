@@ -7,6 +7,7 @@
 
 #include "my.h"
 #include "mysh.h"
+#include "lk_list.h"
 
 static int is_null(char **args)
 {
@@ -17,21 +18,47 @@ static int is_null(char **args)
 	return (0);
 }
 
+static char *get_path(void)
+{
+	char buff[4096];
+	char *path;
+	
+	if (buff == NULL)
+		return (NULL);
+	if ((path = getcwd(buff, sizeof(buff))) != NULL)
+		return (path);
+	my_puterror("Path too long.\n");
+	return (NULL);
+}
+
+static void set_env_pwd(void)
+{
+	char *new_pwd[3] = {"PWD", NULL, NULL};
+	char *old_pwd[3] = {"OLDPWD", NULL, NULL};
+
+	new_pwd[1] = get_path();
+	old_pwd[1] = get_value("PWD");
+	head(new_pwd);
+	head(old_pwd);
+}
+
 int cd(char **args)
 {
 	int i = 0;
+	int status;
 
 	if (is_null(args))
 		return (-1);
 	while (args[i] != NULL)
 		i++;
-	if (i == 1)
-		return (chdir(get_value("HOME")));
-	else if (i != 2) {
+	if (i != 2 && i != 1) {
 		my_puterror("cd: Too many arguments.");
 		return (-1);
-	}
+	} else if (i == 1)
+		status = chdir(get_value("HOME"));
 	if (my_strcmp(args[1], "-") == 0)
-		return (chdir(get_value("OLDPWD")));
-	return (chdir(args[1]));
+		status = chdir(get_value("OLDPWD"));
+	status = chdir(args[1]);
+	set_env_pwd();
+	return (status);
 }
