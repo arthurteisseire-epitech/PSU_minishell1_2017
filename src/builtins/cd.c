@@ -22,7 +22,7 @@ static char *get_path(void)
 {
 	char buff[4096];
 	char *path;
-	
+
 	if (buff == NULL)
 		return (NULL);
 	if ((path = getcwd(buff, sizeof(buff))) != NULL)
@@ -54,7 +54,7 @@ int cd(char **args)
 	if (i >= 3) {
 		my_puterror("cd: Too many arguments.\n");
 		return (-1);
-	} 
+	}
 	if (i == 1)
 		status = chdir(get_value("HOME"));
 	else if (my_strcmp(args[1], "-") == 0)
