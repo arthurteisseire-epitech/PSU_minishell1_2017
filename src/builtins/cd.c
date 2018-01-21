@@ -61,8 +61,6 @@ int cd(char **args)
 		status = chdir(get_value("OLDPWD"));
 	else
 		status = chdir(args[1]);
-	if (status == -1)
-		perror(args[1]);
-	set_env_pwd();
+	status == -1 ? perror(args[1]) : set_env_pwd();
 	return (status);
 }
