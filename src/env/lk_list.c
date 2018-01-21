@@ -5,9 +5,9 @@
 ** by Arthur Teisseire
 */
 
+#include "lk_list.h"
 #include "my.h"
 #include "mysh.h"
-#include "lk_list.h"
 
 void init_list(void)
 {
@@ -60,8 +60,12 @@ int delete_node(char *name)
 	lk_list_t *prev = find_prev(name);
 
 	if (prev == NULL) {
-		if (env->begin && my_strcmp(name, env->begin->name) == 0)
-			free_env();
+		if (env->begin && my_strcmp(name, env->begin->name) == 0) {
+			env->tmp = env->begin;
+			env->begin = env->begin->next;
+			free_node(env->tmp);
+			env->tmp = NULL;
+		}
 		return (0);
 	}
 	env->tmp = prev->next;

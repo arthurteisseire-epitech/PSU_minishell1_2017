@@ -7,6 +7,7 @@
 
 #include "my.h"
 #include "mysh.h"
+#include "lk_list.h"
 #include "env.h"
 
 int mysh(void)

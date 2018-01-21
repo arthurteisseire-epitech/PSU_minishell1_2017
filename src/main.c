@@ -8,6 +8,9 @@
 #include "my.h"
 #include "mysh.h"
 #include "get_next_line.h"
+#include "lk_list.h"
+
+control_t *env;
 
 int main(int ac, char **av)
 {

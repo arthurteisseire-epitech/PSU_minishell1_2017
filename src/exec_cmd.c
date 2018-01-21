@@ -46,8 +46,6 @@ static int exec_with_path(char **args)
 
 	if (!path)
 		return (0);
-	if (exec_builtins(args))
-		return (0);
 	skip_name(&path);
 	paths = split(path, ":");
 	while (paths[i] != NULL) {

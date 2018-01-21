@@ -8,11 +8,25 @@
 #include "my.h"
 #include "mysh.h"
 #include "get_next_line.h"
+#include "split.h"
+#include "builtins.h"
+
+static void fork_and_exec(char *cmd)
+{
+	pid_t child_pid = fork();
+
+	if (child_pid == 0) {
+		exec_cmd(cmd);
+		return;
+	} else if (child_pid == -1)
+		return;
+	wait(NULL);
+}
 
 int run(void)
 {
 	char *cmd = NULL;
-	pid_t child_pid;
+	char **args;
 
 	while (1) {
 		my_putstr("$> ");
@@ -20,13 +34,9 @@ int run(void)
 			free(cmd);
 		if (set_and_check_cmd(&cmd) == 0)
 			return (1);
-		child_pid = fork();
-		if (child_pid == 0) {
-			exec_cmd(cmd);
-			return (0);
-		} else if (child_pid == -1)
-			return (-1);
-		wait(NULL);
+		args = split(cmd, " \t");
+		if (!exec_builtins(args))
+			fork_and_exec(cmd);
 	}
 	return (1);
 }
