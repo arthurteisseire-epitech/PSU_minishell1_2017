@@ -14,6 +14,8 @@
 #include <sys/wait.h>
 #include <stdio.h>
 
+#define SEGFAULT 11
+
 extern char **environ;
 
 void exec_cmd(char *cmd, char **args);

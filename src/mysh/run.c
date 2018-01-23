@@ -11,6 +11,12 @@
 #include "split.h"
 #include "builtins.h"
 
+static void handle_status(int wstatus)
+{
+	if (WTERMSIG(wstatus) == SEGFAULT)
+		my_putstr("Segmentation fault\n");
+}
+
 static int fork_and_exec(char **args, char *cmd)
 {
 	pid_t child_pid;
@@ -24,8 +30,7 @@ static int fork_and_exec(char **args, char *cmd)
 		} else if (child_pid == -1)
 			return (-1);
 		wait(&wstatus);
-		if (WTERMSIG(wstatus) == 11)
-			my_putstr("Segmentation fault\n");
+		handle_status(wstatus);
 	}
 	return (1);
 }
