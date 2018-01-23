@@ -10,6 +10,7 @@
 #include "mysh.h"
 #include "env.h"
 #include "split.h"
+#include "my_perror.h"
 
 int init_env(void)
 {
@@ -59,7 +60,7 @@ int my_env(char **args)
 	lk_list_t *curr = env->begin;
 
 	if (args[1]) {
-		perror(args[1]);
+		my_perror(args[1]);
 		return (-1);
 	}
 	while (curr != NULL) {
