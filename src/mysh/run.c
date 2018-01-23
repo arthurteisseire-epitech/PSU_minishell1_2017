@@ -15,6 +15,8 @@ static void handle_status(int wstatus)
 {
 	if (WTERMSIG(wstatus) == SEGFAULT)
 		my_putstr("Segmentation fault\n");
+	if (WTERMSIG(wstatus) == FLOATEXCEPT)
+		my_putstr("Floating exception\n");
 }
 
 static int fork_and_exec(char **args, char *cmd)
