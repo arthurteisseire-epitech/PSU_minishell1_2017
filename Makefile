@@ -23,6 +23,7 @@ SRC     =	$(DSRC)main.c \
 		$(DMYSH)run.c \
 		$(DMYSH)exec_cmd.c \
 		$(DARGS)count_args.c \
+		$(DARGS)my_perror.c \
 		$(DARGS)free_args.c \
 		$(DSPLIT)split.c \
 		$(DSPLIT)count_words.c \

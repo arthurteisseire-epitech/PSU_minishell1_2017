@@ -8,6 +8,7 @@
 #include "my.h"
 #include "mysh.h"
 #include "lk_list.h"
+#include "my_perror.h"
 
 static int is_null(char **args)
 {
@@ -63,6 +64,6 @@ int cd(char **args)
 		status = chdir(get_value("OLDPWD"));
 	else
 		status = chdir(args[1]);
-	status == -1 ? perror(args[1]) : set_env_pwd();
+	status == -1 ? my_perror(args[1]) : set_env_pwd();
 	return (status);
 }
