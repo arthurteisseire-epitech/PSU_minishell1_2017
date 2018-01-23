@@ -10,8 +10,8 @@
 
 void my_perror(char *str)
 {
-	my_putstr(str);
-	my_putstr(": ");
-	my_putstr(strerror(errno));
-	my_putstr(".\n");
+	my_puterror(str);
+	my_puterror(": ");
+	my_puterror(strerror(errno));
+	my_puterror(".\n");
 }
