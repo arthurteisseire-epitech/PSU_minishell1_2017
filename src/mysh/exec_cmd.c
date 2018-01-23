@@ -11,6 +11,7 @@
 #include "env.h"
 #include "get_next_line.h"
 #include "builtins.h"
+#include "my_perror.h"
 
 static char *concat_with_slash(char *dest, char *src, int len_src)
 {
@@ -49,7 +50,8 @@ static int exec_with_path(char **args)
 	paths = split(path, ":");
 	while (paths[i] != NULL) {
 		cmd = concat_with_slash(paths[i], args[0], len_prog);
-		execve(cmd, args, environ);
+		if (access(cmd, F_OK) != -1)
+			execve(cmd, args, environ);
 		if (cmd)
 			free(cmd);
 		i++;
@@ -61,7 +63,7 @@ void exec_cmd(char *cmd, char **args)
 {
 	int status = -1;
 
-	if (args && args[0])
+	if (args && args[0] && access(cmd, F_OK) != -1)
 		status = execve(args[0], args, environ);
 	if (status == -1 && my_strcmp(args[0], "") != 0)
 		status = exec_with_path(args);
