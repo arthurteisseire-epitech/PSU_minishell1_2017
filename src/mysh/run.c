@@ -25,7 +25,7 @@ static int fork_and_exec(char **args, char *cmd)
 			return (-1);
 		wait(&wstatus);
 		if (WTERMSIG(wstatus) == 11)
-			my_puterror("Segmentation fault\n");
+			my_putstr("Segmentation fault\n");
 	}
 	return (1);
 }
