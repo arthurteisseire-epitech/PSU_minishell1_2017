@@ -51,20 +51,28 @@ static int exec_with_path(char **args)
 	while (paths[i] != NULL) {
 		cmd = concat_with_slash(paths[i], args[0], len_prog);
 		if (access(cmd, F_OK) != -1)
-			execve(cmd, args, environ);
-		if (cmd)
-			free(cmd);
-		i++;
-	}
-	return (-1);
+
+                        execve(cmd, args, environ);
+                if (cmd)
+                        free(cmd);
+                i++;
+        }
+        return (-1);
 }
 
 void exec_cmd(char *cmd, char **args)
 {
-	int status = -1;
+        int status = -1;
 
 	if (args && args[0] && access(cmd, F_OK) != -1)
 		status = execve(args[0], args, environ);
+	if (errno == ENOEXEC) {
+		my_puterror(args[0]);
+		my_puterror(": ");
+		my_puterror(strerror(ENOEXEC));
+		my_puterror(". Wrong Architecture.\n");
+		return;
+	}
 	if (status == -1 && my_strcmp(args[0], "") != 0)
 		status = exec_with_path(args);
 	if (status == -1 && args[0] != NULL) {
