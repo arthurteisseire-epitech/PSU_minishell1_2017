@@ -38,7 +38,7 @@ SRC     =	$(DSRC)main.c \
 		$(DENV)head.c \
 		$(DBUILTS)cd.c \
 		$(DBUILTS)exec_builtins.c
-CFLAGS	=	-Wall -W -Wextra -I$(INC)
+CFLAGS	+=	-Wall -W -Wextra -I$(INC)
 OBJ	=	$(SRC:.c=.o)
 NAME	=	mysh
 
@@ -46,7 +46,7 @@ all: $(NAME)
 
 $(NAME):	$(OBJ)
 	make -C $(DLIB)
-	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LIBS)
+	$(CC) -o $(NAME) $(OBJ) $(LIBS)
 
 clean:
 	make clean -C $(DLIB)
