@@ -22,4 +22,5 @@ int mysh(void)
 		my_puterror("An error occured during the program creation\n");
 		return (0);
 	}
+	free_env();
 }
