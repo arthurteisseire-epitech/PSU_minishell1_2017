@@ -41,6 +41,11 @@ int my_setenv(char **args)
 		my_puterror("setenv: Too many arguments.\n");
 		return (-1);
 	}
+	if (!my_str_isalphanum(args[1])) {
+		my_puterror("setenv: Variable name must contain "
+		"alphanumeric characters.\n");
+		return (-1);
+	}
 	head(&args[1]);
 	return (0);
 }
