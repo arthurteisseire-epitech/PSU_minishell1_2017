@@ -13,9 +13,13 @@
 
 static void handle_status(int wstatus)
 {
-	if (WTERMSIG(wstatus) == SEGFAULT)
+	if (WCOREDUMP(wstatus) && WTERMSIG(wstatus) == SEGFAULT)
 		my_putstr("Segmentation fault\n");
-	if (WTERMSIG(wstatus) == DIVZERO)
+	else if (!WCOREDUMP(wstatus) && WTERMSIG(wstatus) == SEGFAULT)
+		my_putstr("Segmentation fault\n");
+	if (WCOREDUMP(wstatus) && WTERMSIG(wstatus) == DIVZERO)
+		my_putstr("Floating exception\n");
+	else if (!WCOREDUMP(wstatus) && WTERMSIG(wstatus) == DIVZERO)
 		my_putstr("Floating exception\n");
 }
 
