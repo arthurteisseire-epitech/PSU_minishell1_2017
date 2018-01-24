@@ -15,7 +15,7 @@ static void handle_status(int wstatus)
 {
 	if (WTERMSIG(wstatus) == SEGFAULT)
 		my_putstr("Segmentation fault\n");
-	if (WTERMSIG(wstatus) == FLOATEXCEPT)
+	if (WTERMSIG(wstatus) == DIVZERO)
 		my_putstr("Floating exception\n");
 }
 

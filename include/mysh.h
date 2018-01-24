@@ -15,7 +15,7 @@
 #include <stdio.h>
 
 #define SEGFAULT 11
-#define FLOATEXCEPT 8
+#define DIVZERO 8
 
 extern char **environ;
 
