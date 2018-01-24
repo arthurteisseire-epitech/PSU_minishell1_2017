@@ -8,7 +8,8 @@ SRC	=	my_putchar.c \
 		my_strcpy.c \
 		my_strdup.c \
 		my_strcmp.c \
-		my_strncmp.c
+		my_strncmp.c \
+		my_str_isalphanum.c
 OBJ	=	$(SRC:.c=.o)
 NAME	=	libmy.a
 
