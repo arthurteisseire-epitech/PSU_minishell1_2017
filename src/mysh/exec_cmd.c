@@ -59,19 +59,32 @@ static int exec_with_path(char **args)
 	return (-1);
 }
 
+static int wrong_arch(char *arg)
+{
+	if (errno == ENOEXEC) {
+		my_putstr(arg);
+		my_putstr(": ");
+		my_putstr(strerror(ENOEXEC));
+		my_putstr(". Wrong Architecture.\n");
+		return (1);
+	}
+	return (0);
+}
+
 void exec_cmd(char *cmd, char **args)
 {
 	int status = -1;
 
-	if (args && args[0] && access(cmd, F_OK) != -1)
+	if (args && args[0] && access(cmd, F_OK) != -1) {
+		if (access(cmd, F_OK) != -1) {
+			my_putstr(args[0]);
+			my_putstr(": Permission denied.\n");
+			return;
+		}
 		status = execve(args[0], args, environ);
-	if (errno == ENOEXEC) {
-		my_putstr(args[0]);
-		my_putstr(": ");
-		my_putstr(strerror(ENOEXEC));
-		my_putstr(". Wrong Architecture.\n");
-		return;
 	}
+	if (wrong_arch(args[0]))
+		return;
 	if (status == -1 && my_strcmp(args[0], "") != 0)
 		status = exec_with_path(args);
 	if (status == -1 && args[0] != NULL) {
