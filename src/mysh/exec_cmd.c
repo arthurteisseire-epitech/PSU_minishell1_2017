@@ -51,7 +51,6 @@ static int exec_with_path(char **args)
 	while (paths[i] != NULL) {
 		cmd = concat_with_slash(paths[i], args[0], len_prog);
 		if (access(cmd, F_OK) != -1)
-
                         execve(cmd, args, environ);
                 if (cmd)
                         free(cmd);
