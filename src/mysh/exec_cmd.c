@@ -67,10 +67,10 @@ void exec_cmd(char *cmd, char **args)
 	if (args && args[0] && access(cmd, F_OK) != -1)
 		status = execve(args[0], args, environ);
 	if (errno == ENOEXEC) {
-		my_puterror(args[0]);
-		my_puterror(": ");
-		my_puterror(strerror(ENOEXEC));
-		my_puterror(". Wrong Architecture.\n");
+		my_putstr(args[0]);
+		my_putstr(": ");
+		my_putstr(strerror(ENOEXEC));
+		my_putstr(". Wrong Architecture.\n");
 		return;
 	}
 	if (status == -1 && my_strcmp(args[0], "") != 0)
