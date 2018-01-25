@@ -46,7 +46,7 @@ static int exec_with_path(char **args)
 	int i = 0;
 
 	if (!path)
-		return (0);
+		return (-1);
 	paths = split(path, ":");
 	while (paths[i] != NULL) {
 		cmd = concat_with_slash(paths[i], args[0], len_prog);
