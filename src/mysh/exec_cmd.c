@@ -76,7 +76,7 @@ void exec_cmd(char *cmd, char **args)
 	int status = -1;
 
 	if (args && args[0] && access(cmd, F_OK) != -1) {
-		if (access(cmd, F_OK) != -1) {
+		if (access(cmd, X_OK) == -1) {
 			my_putstr(args[0]);
 			my_putstr(": Permission denied.\n");
 			return;
