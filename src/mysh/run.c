@@ -33,9 +33,10 @@ static int fork_and_exec(char **args, char *cmd)
 		if (child_pid == 0) {
 			exec_cmd(cmd, args);
 			return (0);
-		} else if (child_pid == -1)
+		} else if (child_pid > 0) {
+			wait(&wstatus);
+		} else
 			return (-1);
-		wait(&wstatus);
 		handle_status(wstatus);
 	}
 	return (1);
@@ -51,7 +52,7 @@ int run(void)
 		if (cmd)
 			free(cmd);
 		cmd = get_next_line(0);
-		if (my_exit(cmd) == 0)
+		if (my_exit(cmd))
 			return (1);
 		args = split(cmd, " \t");
 		if (fork_and_exec(args, cmd) != 1)
@@ -64,12 +65,12 @@ int my_exit(char *cmd)
 {
 	if (cmd == NULL) {
 		my_putstr("exit\n");
-		return (0);
+		return (1);
 	}
 	if (my_strcmp(cmd, "exit") == 0) {
 		my_putstr("exit\n");
 		free(cmd);
-		return (0);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
