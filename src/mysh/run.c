@@ -50,7 +50,8 @@ int run(void)
 		my_putstr("$> ");
 		if (cmd)
 			free(cmd);
-		if (set_and_check_cmd(&cmd) == 0)
+		cmd = get_next_line(0);
+		if (my_exit(cmd) == 0)
 			return (1);
 		args = split(cmd, " \t");
 		if (fork_and_exec(args, cmd) != 1)
@@ -59,16 +60,15 @@ int run(void)
 	return (1);
 }
 
-int set_and_check_cmd(char **cmd)
+int my_exit(char *cmd)
 {
-	*cmd = get_next_line(0);
-	if (*cmd == NULL) {
+	if (cmd == NULL) {
 		my_putstr("exit\n");
 		return (0);
 	}
-	if (my_strcmp(*cmd, "exit") == 0) {
+	if (my_strcmp(cmd, "exit") == 0) {
 		my_putstr("exit\n");
-		free(*cmd);
+		free(cmd);
 		return (0);
 	}
 	return (1);
