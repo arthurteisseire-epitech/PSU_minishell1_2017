@@ -51,17 +51,17 @@ static int exec_with_path(char **args)
 	while (paths[i] != NULL) {
 		cmd = concat_with_slash(paths[i], args[0], len_prog);
 		if (access(cmd, F_OK) != -1)
-                        execve(cmd, args, environ);
-                if (cmd)
-                        free(cmd);
-                i++;
-        }
-        return (-1);
+			execve(cmd, args, environ);
+		if (cmd)
+			free(cmd);
+		i++;
+	}
+	return (-1);
 }
 
 void exec_cmd(char *cmd, char **args)
 {
-        int status = -1;
+	int status = -1;
 
 	if (args && args[0] && access(cmd, F_OK) != -1)
 		status = execve(args[0], args, environ);
