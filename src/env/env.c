@@ -10,7 +10,6 @@
 #include "mysh.h"
 #include "env.h"
 #include "split.h"
-#include "my_perror.h"
 
 int init_env(void)
 {
