@@ -65,7 +65,7 @@ int my_env(char **args)
 	lk_list_t *curr = env->begin;
 
 	if (args[1]) {
-		my_perror(args[1]);
+		my_puterror("No argument for env, thanks\n");
 		return (-1);
 	}
 	while (curr != NULL) {
