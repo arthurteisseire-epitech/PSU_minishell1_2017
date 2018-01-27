@@ -71,16 +71,30 @@ static int wrong_arch(char *arg)
 	return (0);
 }
 
+static int right_ok(char *pathname)
+{
+	DIR *dir;
+
+	if (access(pathname, X_OK) == -1) {
+		my_putstr(pathname);
+		my_putstr(": Permission denied.\n");
+		return (0);
+	} else if ((dir = opendir(pathname)) != NULL) {
+		my_putstr(pathname);
+		my_putstr(": Permission denied.\n");
+		closedir(dir);
+		return (0);
+	}
+	return (1);
+}
+
 void exec_cmd(char *cmd, char **args)
 {
 	int status = -1;
 
-	if (args && args[0] && access(cmd, F_OK) != -1) {
-		if (access(cmd, X_OK) == -1) {
-			my_putstr(args[0]);
-			my_putstr(": Permission denied.\n");
+	if (args && args[0] && access(args[0], F_OK) != -1) {
+		if (!right_ok(args[0]))
 			return;
-		}
 		status = execve(args[0], args, environ);
 	}
 	if (wrong_arch(args[0]))

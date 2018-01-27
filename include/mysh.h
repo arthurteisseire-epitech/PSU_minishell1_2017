@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <stdio.h>
+#include <dirent.h>
 
 #define SEGFAULT 11
 #define DIVZERO 8
